@@ -203,7 +203,7 @@ In order to create EKS cluster using workastation your workstation need to insta
     Note:
     Above command will install the media wiki on your eks cluster and you need to perform all the task in order to make it up and running.
     It will create LoadBalancer service in aws and using the url you will be able to access the Meidawiki.
-    All the username and passowrd need to configure along with host and secret.
+    All the username and passowrd need to configure along with host and secrets, pv, pvc with dynamic provision.
 
 # Destroy release and EKS cluster.
 
@@ -215,6 +215,8 @@ In order to create EKS cluster using workastation your workstation need to insta
     `terraform destroy`
     type Yes and it will destroy the EKS cluster.
 
+    Please make sure after this delete you should verify all the resorces delete proper and no resource is pending in your account which lead to cost.
+
 # Conclusion + Future
 
 1. We can automate helm deployment using terraform
@@ -222,3 +224,15 @@ In order to create EKS cluster using workastation your workstation need to insta
 3. secure way of mamagment of kubeconfig file.
 4. Add autoscaler to increase worker node based on the workload.
 5. tf state managemnet with s3 backend.
+6. Providing access to application.
+7. Please read the Mediawiki helm chart which will tell what resources we need in order to deploy the media wiki. You need secrets, pv, pvc , clusterIp svc etc..
+8. We can perform blue-green deployment using helm deployment with the help of Jenkins. 
+9. For production grade deployment we can make sure we are using Replicaset of deployment and serices from the aws like route53, ssl certoficate and do deployment using ingress and nodeport service.
+
+
+Work Snippet
+
+Please check the folder 
+```
+Project-snippet
+```
