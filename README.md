@@ -184,6 +184,41 @@ In order to create EKS cluster using workastation your workstation need to insta
 
 # Step 3: Deploy Media wiki using Helm3 on EKS cluster.
 
+    Note: We can automate the deployment of mediawiki but I am following here helm insteruction.
+    Noe we have cluster up and running and all worker node are in ready state and your workstation installed with helm3. Please follow the below steps.
 
+    1. We are using below helm chart for installing media release.
 
+    `https://charts.bitnami.com/bitnami`
 
+    To deploy the same please follow below steps.
+    Add the helm chart repo locally.
+    ```
+    helm repo add bitnami https://charts.bitnami.com/bitnami
+
+    2. Install the mediawiki with below command. 
+    helm install my-release bitnami/mediawiki
+    # Read more about the installation in the Bitnami MediaWiki Stack Chart Github repository
+    
+    Note:
+    Above command will install the media wiki on your eks cluster and you need to perform all the task in order to make it up and running.
+    It will create LoadBalancer service in aws and using the url you will be able to access the Meidawiki.
+    All the username and passowrd need to configure along with host and secret.
+
+# Destroy release and EKS cluster.
+
+  1. destroy release using
+     `helm delete <release-name>`
+
+  2. destroy EKS cluster using below command.
+
+    `terraform destroy`
+    type Yes and it will destroy the EKS cluster.
+
+# Conclusion + Future
+
+1. We can automate helm deployment using terraform
+2. create IAM role with required permission to setup EKS cluster.
+3. secure way of mamagment of kubeconfig file.
+4. Add autoscaler to increase worker node based on the workload.
+5. tf state managemnet with s3 backend.
