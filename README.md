@@ -197,6 +197,30 @@ In order to create EKS cluster using workastation your workstation need to insta
     helm repo add bitnami https://charts.bitnami.com/bitnami
 
     2. Install the mediawiki with below command. 
+
+    1. create seceret using kubectl
+    ```
+    kubectl create secret docker-registry secret-tiger-docker \
+  --docker-username=tiger \
+  --docker-password=pass113 \
+  --docker-email=tiger@acme.com
+  ```
+  or using terraform 
+     file is located with name secert.tf.
+    we need to pass the secret in values.yaml to pull the docker image.
+    
+    2. If you want to create the storageclass and pass that into values.yaml use below command located in storageclass folder.
+    kubectl create -f mymediawiki.yaml
+
+    It will create the storage class we need to pass this storage class in values.yaml of helm-chart folder.
+
+    3. go into the deployment folder and perform terraform apply.
+
+
+    OR 
+    
+    perform the below steps manually
+
     helm install my-release bitnami/mediawiki
     # Read more about the installation in the Bitnami MediaWiki Stack Chart Github repository
     
